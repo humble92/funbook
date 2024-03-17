@@ -40,8 +40,8 @@ def home():
         generate_pages_by_picture(style)
 
     with tab2:
-        st.write('Make your audio book using only the first sentence.'
-                 'AI will complete the rest of your story for you.'
+        st.write('Make your audio book using only the first sentence. '
+                 'AI will complete the rest of your story for you. '
                  'Sometime it also generates picture matching the story. Have fun!'
                  )
 
@@ -95,7 +95,11 @@ def generate_pages_by_picture(style):
         st.image(uploaded_picture, caption='Uploaded Image.', use_column_width=True)
 
         with st.spinner('Thinking and processing...'):
-            full_path = os.path.join('uploads', uploaded_picture.name)
+            # Create a upload directory for uploaded files if it doesn't exist
+            dir_path = 'uploads'
+            mkdir(dir_path)
+
+            full_path = os.path.join(dir_path, uploaded_picture.name)
             with open(full_path, "wb") as file:
                 file.write(bytes_data)
 
@@ -166,7 +170,11 @@ def text2speech(input_text):
     }
     response = requests.post(API_URL, headers=headers, json=payload)
 
-    full_path = os.path.join('output', 'audio.flac')
+    # Create the output directory if it doesn't exist
+    dir_path = 'output'
+    mkdir(dir_path)
+
+    full_path = os.path.join(dir_path, 'audio.flac')
     with open(full_path, 'wb') as file:
         file.write(response.content)
 
@@ -181,11 +189,24 @@ def text2image(input_text):
     }
     response = requests.post(API_URL, headers=headers, json=payload)
 
-    full_path = os.path.join('output', 'image.png')
+    # Create the output directory if it doesn't exist
+    dir_path = 'output'
+    mkdir(dir_path)
+
+    full_path = os.path.join(dir_path, 'image.png')
     with open(full_path, 'wb') as file:
         file.write(response.content)
 
     return response.content
+
+
+def mkdir(dir_path):
+    # Create a directory if it doesn't exist
+    try:
+        os.makedirs(dir_path, exist_ok=True)
+    except OSError as e:
+        # Handles existing directory gracefully
+        pass
 
 
 # Press the green button in the gutter to run the script.
