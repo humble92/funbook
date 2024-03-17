@@ -25,7 +25,7 @@ def home():
     st.subheader("Genre", divider='rainbow')
     style = st.selectbox(
         'Which style would you like to draw?',
-        ('Fantasy', 'Fairy tales', 'satirical', 'Realism', 'Educational', 'Experimental'))
+        ('Fantasy', 'Fairy tales', 'Satirical', 'Realism', 'Educational', 'Experimental'))
     st.write('You selected:', style)
 
     st.subheader("Source", divider='rainbow')
