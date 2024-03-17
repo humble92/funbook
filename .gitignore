@@ -160,7 +160,7 @@ cython_debug/
 .idea/
 
 # app running data
-uploads/*
+#uploads/*
 output/*
 
 # local only
