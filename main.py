@@ -40,8 +40,8 @@ def home():
         generate_pages_by_picture(style)
 
     with tab2:
-        st.write('Make your audio book using only the first sentence.'
-                 'AI will complete the rest of your story for you.'
+        st.write('Make your audio book using only the first sentence. '
+                 'AI will complete the rest of your story for you. '
                  'Sometime it also generates picture matching the story. Have fun!'
                  )
 
